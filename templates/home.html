@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+{% block content %}
+    <div class="row">
+        {% for product in product_list %}
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card mx-auto" style="max-width: 22rem; position: relative;">
+                    <span class="category-badge">{{ product['category'] }}</span>
+                    <img
+                            class="card-img-top"
+                            src="{{ product['image'] }}"
+                            alt="Fjallraven - Foldsack No. 1 Backpack"
+                    >
+                    <div class="card-body">
+                        <h5 class="card-title product-title">{{ product['title'] }}</h5>
+                        <p class="card-text product-description">{{ product['description'] }}</p>
+                        <div class="mb-3 price-tag">$ {{ product['price'] }}</div>
+                        <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
