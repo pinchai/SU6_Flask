@@ -26,6 +26,11 @@ def product_detail(pro_id):
     return render_template('product_detail.html', product=product)
 
 
+@app.get('/cart')
+def cart():
+    return render_template('cart.html')
+
+
 @app.get('/about')
 def about():
     return render_template('about.html')

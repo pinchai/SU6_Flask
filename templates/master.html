@@ -31,17 +31,13 @@
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="button">Cart(10)</button>
+                    <a href="/cart" class="btn btn-outline-success my-2 my-sm-0" type="button">Cart([[ cart_list.length ]])</a>
                 </form>
             </div>
         </nav>
     </div>
     {# Main Content #}
     <div class="container">
-        <h1>[[ counter ]]</h1>
-        <input type="text" v-model="message">
-        <input type="button" value="click me" @click="greeting()">
-        <input type="button" value="increase" @click="increase()">
         {% block content %}{% endblock %}
     </div>
     <div class="container-fluid p-0 m-0">
@@ -96,18 +92,32 @@
     const {createApp} = Vue
     createApp({
         delimiters: ['[[', ']]'],
+        mounted() {
+            let cart = JSON.parse(localStorage.getItem('cart_list') ?? '[]')
+            this.cart_list = cart
+        },
         data() {
             return {
                 message: 'Hello World!',
-                counter: 0
+                counter: 0,
+                cart_list: [],
+                grand_total: 0,
+                shipping_fee: 1.5
             }
         },
         methods: {
-            greeting(){
-                alert('hello')
+            addToCart(product) {
+                product.qty = 1
+                this.cart_list.push(product)
+                localStorage.setItem('cart_list', JSON.stringify(this.cart_list))
             },
-            increase(){
-                this.counter++
+            calGrandTotal(){
+                this.grand_total = 0
+                this.cart_list.forEach(item=>{
+                    let total = parseFloat(item.qty) * parseFloat(item.price)
+                   this.grand_total += total
+                })
+                return this.grand_total
             }
         }
     }).mount('#app')
