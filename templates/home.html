@@ -12,9 +12,15 @@
                     >
                     <div class="card-body">
                         <h5 class="card-title product-title">{{ product['title'] }}</h5>
-                        <p class="card-text product-description">{{ product['description'] }}</p>
+                        <a
+                                href="/product-detail/{{ product['id'] }}"
+                                target="_blank"
+                                class="card-text product-description text-dark"
+                        >
+                            {{ product['description'] }}
+                        </a>
                         <div class="mb-3 price-tag">$ {{ product['price'] }}</div>
-                        <a href="#" class="btn btn-outline-primary btn-block">Add to Cart</a>
+                        <button class="btn btn-outline-primary btn-block">Add to Cart</button>
                     </div>
                 </div>
             </div>

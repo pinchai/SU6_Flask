@@ -1,0 +1,31 @@
+{% extends "master.html" %}
+{% block content %}
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-5">
+            <div class="card">
+                <img
+                        src="{{ product['image'] }}"
+                        class="card-img-top img-fluid"
+                        alt="Fjallraven Backpack"
+                        style="height: 500px; object-fit: contain"
+                >
+            </div>
+        </div>
+        <!-- Product Info -->
+        <div class="col-md-7">
+            <h2 class="mb-3">{{ product['title'] }}</h2>
+            <h4 class="text-success mb-3">$ {{ product['price'] }}</h4>
+            <p class="mb-4">
+                <strong>Description:</strong><br>
+                {{ product['description'] }}
+            </p>
+            <p>
+                <strong>Category:</strong>  {{ product['category'] }}
+            </p>
+            <div class="mt-4">
+                <button class="btn btn-primary btn-lg">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
