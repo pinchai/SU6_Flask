@@ -24,7 +24,7 @@
                 <strong>Category:</strong>  {{ product['category'] }}
             </p>
             <div class="mt-4">
-                <button class="btn btn-primary btn-lg">Add to Cart</button>
+                <button @click="addToCart({{ product }})" class="btn btn-primary btn-lg">Add to Cart</button>
             </div>
         </div>
     </div>
