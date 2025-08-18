@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import requests
 app = Flask(__name__)
 
@@ -6,22 +6,25 @@ app = Flask(__name__)
 @app.get("/")
 @app.get("/home")
 def home():
-    product_list = []
-    api_url = 'https://fakestoreapi.com/products'
-    r = requests.get(api_url)
-    if r.status_code == 200:
-        product_list = r.json()
+    from product import products
+    product_list = products
+    # api_url = 'https://fakestoreapi.com/products'
+    # r = requests.get(api_url)
+    # if r.status_code == 200:
+    #     product_list = r.json()
     return render_template('home.html', product_list=product_list)
 
 
-@app.get("/product-detail/<int:pro_id>")
-def product_detail(pro_id):
-    product = []
-    api_url = f"https://fakestoreapi.com/products/{pro_id}"
-    r = requests.get(api_url)
-    if r.status_code == 200:
-        product = r.json()
-    print(product)
+@app.get("/product-detail")
+def product_detail():
+    from product import products, getByID
+    pro_id = request.args.get('pro_id', type=int)
+    product = getByID(pro_id)
+    # api_url = f"https://fakestoreapi.com/products/{pro_id}"
+    # r = requests.get(api_url)
+    # if r.status_code == 200:
+    #     product = r.json()
+    # print(product)
 
     return render_template('product_detail.html', product=product)
 
